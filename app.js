@@ -5,7 +5,6 @@ var bodyParser = require('body-parser');
 var app = express();
 
 // to do
-// 		- change means of accessing data from just printing the json to a property on model obj
 // 		- write unit test
 //		- push to heroku
 

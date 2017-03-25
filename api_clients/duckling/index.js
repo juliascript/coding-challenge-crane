@@ -38,7 +38,7 @@ function makeAPIRequest(text, callback){
 
 function DucklingAPIClient(text, callback){
 	makeAPIRequest(text, function(err, res, body){
-		var dateObj = "test";//body; // REPLACE THIS: find in body
+		var dateObj = body; // REPLACE THIS: find in body
 		var ducklingObject = new Duckling(text, dateObj);
 
 		callback(ducklingObject);
