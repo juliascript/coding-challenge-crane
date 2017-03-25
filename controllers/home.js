@@ -2,6 +2,9 @@ var ducklingAPIClient = require('../api_clients/duckling');
 var bodyParser = require('body-parser');
 var request = require('request');
 
+urlencodedParser = bodyParser.urlencoded({ extended: false });
+jsonParser = bodyParser.json();
+
 module.exports = function(app) {
 
 	app.get('/', function(req, res){
@@ -10,7 +13,7 @@ module.exports = function(app) {
 	});
 
 	// form generated POST request
-	app.post('/', function(req, res){
+	app.post('/', urlencodedParser, function(req, res){
 		var textString = req.body.text;
 
 		ducklingAPIClient(textString, function(ducklingObject){
@@ -22,7 +25,7 @@ module.exports = function(app) {
 	});
 
 	// JSON POST request
-	app.post('/api', function(req, res){
+	app.post('/api', jsonParser, function(req, res){
 		var textString = req.body.text;
 
 		ducklingAPIClient(textString, function(ducklingObject){
