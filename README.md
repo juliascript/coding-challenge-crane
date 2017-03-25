@@ -4,4 +4,6 @@ Clone and cd into this repo, then run
 
 `node app.js` // in another terminal 
 
-`npm test` // right now the test doesn't check for anything, but hey, all tests pass ;)
+visit [localhost:3000](localhost:3000) for form page
+
+// `npm test` // right now the test doesn't check for anything, but hey, all tests pass ;)
