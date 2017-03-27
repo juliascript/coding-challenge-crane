@@ -5,9 +5,8 @@ var request = require('request');
 var port = process.env.PORT || 3000;
 
 // if jasmine-node doesn't print to the console.
-jasmine.getEnv().addReporter(new jasmine.ConsoleReporter(console.log));
+// jasmine.getEnv().addReporter(new jasmine.ConsoleReporter(console.log));
 
-// this isn't a good test case
 var expectedResponseForJSON = { TEXTSTR: 'the third saturday of 2018, 9am',
   DATE: 'Saturday, 20 January 2018 at 9:00:00 -0800 (-08:00)' };
 
