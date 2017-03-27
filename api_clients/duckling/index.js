@@ -1,4 +1,5 @@
 var request = require('request');
+var edn = require('edn');
 
 // model object
 var Duckling = require('../../models/duckling');
@@ -38,8 +39,10 @@ function makeAPIRequest(text, callback){
 
 function DucklingAPIClient(text, callback){
 	makeAPIRequest(text, function(err, res, body){
-		var dateObj = body; // REPLACE THIS: find in body
-		var ducklingObject = new Duckling(text, dateObj);
+		body = edn.valueOf(edn.parse(body));
+		var responseObj = edn.valueOf(edn.parse(body)); // not sure why I had to do this twice
+		var dateString = responseObj.results[0].value.start.toString();
+		var ducklingObject = new Duckling(text, dateString);
 
 		callback(ducklingObject);
 	});
