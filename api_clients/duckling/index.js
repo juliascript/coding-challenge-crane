@@ -12,6 +12,9 @@ function formatWithLeadingZeroAndCastToString(number){
 }
 
 function makeAPIRequest(text, callback){
+	// api fails when there are commas and other odd characters
+	text = text.replace(/[^a-zA-Z0-9 :]/g, "");
+
 	// date and time needed for api url
 	var currentdate = new Date(); 
 

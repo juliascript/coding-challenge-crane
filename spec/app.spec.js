@@ -1,22 +1,26 @@
+var jasmine = require('jasmine-node');
 var request = require('request');
 
 // uses the PORT environment variable, if available, otherwise uses port 3000
 var port = process.env.PORT || 3000;
 
-var expectedResponseForJSON = { TEXTSTR: 'I have to do something by tomorrow at 8am',
-  DATE: 'test' };
+// if jasmine-node doesn't print to the console.
+jasmine.getEnv().addReporter(new jasmine.ConsoleReporter(console.log));
+
+// this isn't a good test case
+var expectedResponseForJSON = { TEXTSTR: 'the third saturday of 2018, 9am',
+  DATE: 'Saturday, 20 January 2018 at 9:00:00 -0800 (-08:00)' };
 
 describe("POST to /api", function() {
+
     it("should extract time and return json", function(done) {
         request({
-		    url: "http://localhost:" + port + "/api",
+		    url: "https://crane-coding-challenge.herokuapp.com/api",
 		    method: "POST",
 		    json: true,   
-		    body: {text: "I have to do something by tomorrow at 8am"}
+		    body: {text: "the third saturday of 2018, 9am"}
 		}, function (error, response, body){
 			// expect time to have been extracted
-			
-			var obj = JSON.parse(body);
 			expect(body).toEqual(expectedResponseForJSON);
 			done();
 		});
