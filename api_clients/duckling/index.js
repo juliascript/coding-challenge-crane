@@ -32,19 +32,15 @@ function makeAPIRequest(text, callback){
 	    url: "https://duckling.wit.ai/parse/en$core/" + datetime + "/420/" + text,
 	    method: "GET"
 	}, function (error, response, body){
-
-		// stringifying the object rn
-		// it's application/edn and should be parsed
-		callback(JSON.stringify(error), JSON.stringify(response), JSON.stringify(body));
-
+		// parse application/edn
+		body = edn.valueOf(edn.parse(body));
+		callback(error, response, body);
 	});
 }
 
 function DucklingAPIClient(text, callback){
 	makeAPIRequest(text, function(err, res, body){
-		body = edn.valueOf(edn.parse(body));
-		var responseObj = edn.valueOf(edn.parse(body)); // not sure why I had to do this twice
-		var dateString = responseObj.results[0].value.start.toString();
+		var dateString = body.results[0].value.start.toString();
 		var ducklingObject = new Duckling(text, dateString);
 
 		callback(ducklingObject);
